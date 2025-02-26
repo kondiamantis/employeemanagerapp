@@ -1,32 +1,31 @@
-import { HttpClient } from "@angular/common/http";
-import { inject, Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { Employee } from "../interfaces/employee";
-import { environment } from "../../environments/environment.development";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Employee } from '../interfaces/employee';
+import { environment } from '../../environments/environment';
 
-@Injectable({
-    providedIn: 'root'
-})
 
+@Injectable({providedIn: 'root'})
 export class EmployeeService {
-    private apiServerUrl = environment.apiBaseUrl;
+  private apiServerUrl = environment.apiBaseUrl;
 
-    constructor(private http: HttpClient) { }
+  
 
-    public getEmployees(): Observable<Employee[]> {
-        return this.http.get<Employee[]>(`${this.apiServerUrl}/employee/all`);
-    }
+  constructor(private http: HttpClient){}
 
-    public addEmployee(employee: Employee): Observable<Employee> {
-        return this.http.post<Employee>(`${this.apiServerUrl}/employee/add`, employee);
-    }
+  public getEmployees(): Observable<Employee[]> {
+    return this.http.get<Employee[]>(`${this.apiServerUrl}/employee/all`);
+  }
 
-    public updateEmployee(employee: Employee): Observable<Employee> {
-        return this.http.put<Employee>(`${this.apiServerUrl}/employee/update`, employee);
-    }
+  public addEmployee(employee: Employee): Observable<Employee> {
+    return this.http.post<Employee>(`${this.apiServerUrl}/employee/add`, employee);
+  }
 
-    public deleteEmployee(employeeId: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiServerUrl}/employee/delete/${employeeId}`);
-    }
+  public updateEmployee(employee: Employee): Observable<Employee> {
+    return this.http.put<Employee>(`${this.apiServerUrl}/employee/update`, employee);
+  }
 
+  public deleteEmployee(employeeId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServerUrl}/employee/delete/${employeeId}`);
+  }
 }
