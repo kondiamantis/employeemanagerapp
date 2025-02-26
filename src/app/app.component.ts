@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { Employee } from './interfaces/employee';
 import { EmployeeService } from './services/employee.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
     this.employeeService.getEmployees().subscribe(
       (response: Employee[]) => {
         this.employees = response;
+        console.log(this.employees);
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
