@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   title = 'employeemanagerapp';
 
   public employees!: Employee[];
+  public editEmployee : Employee | null = null;
   
   constructor(private employeeService: EmployeeService) { }
 
@@ -84,6 +85,7 @@ export class AppComponent implements OnInit {
       button.setAttribute('data-target', '#addEmployeeModal');
     }
     if (mode === 'edit') {
+      this.editEmployee = employee;
       button.setAttribute('data-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {
