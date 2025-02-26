@@ -10,7 +10,7 @@
         </li>
      </ul>
      <form class="form-inline my-2 my-lg-0">
-        <input type="search"  ngModel
+        <input type="search" (ngModelChange)="searchEmployees(key.value)" #key="ngModel" ngModel
          name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search employees..." required>
      </form>
   </div>
@@ -139,10 +139,10 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>Are you sure you want to delete employee?</p>
+            <p>Are you sure you want to delete employee {{deleteEmployee?.name}}?</p>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                <button  class="btn btn-danger" data-dismiss="modal">Yes</button>
+                <button *ngIf="deleteEmployee" (click)="onDeleteEmployee(deleteEmployee.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
             </div>
           </div>
       </div>
