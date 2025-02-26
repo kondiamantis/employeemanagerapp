@@ -30,7 +30,7 @@
         </div>
         <ul class="list-group list-group-flush">
            <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{employee?.email}}</li>
-           <li class="list-group-item"><i class="fa fa-phone float-right"></i>Phone : {{employee?.phone}}</li>
+           <li class="list-group-item"><i class="fa fa-phone float-right"></i>{{employee?.phone}}</li>
         </ul>
         <div class="card-body">
            <div class="float-right btn-group btn-group-sm">
@@ -53,7 +53,7 @@
           </button>
        </div>
        <div class="modal-body">
-          <form>
+          <form #addForm="ngForm" (ngSubmit)="onAddEmployee(addForm)">
           <div class="form-group">
              <label for="name">Name</label>
              <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
@@ -76,7 +76,7 @@
           </div>
           <div class="modal-footer">
              <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             <button type="submit" class="btn btn-primary" >Save changes</button>
+             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
           </div>
           </form>
        </div>

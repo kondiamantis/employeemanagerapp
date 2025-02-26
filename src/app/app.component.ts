@@ -4,17 +4,16 @@ import { Employee } from './interfaces/employee';
 import { EmployeeService } from './services/employee.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import {FormsModule, NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
-onAddEmployee(_t46: any) {
-throw new Error('Method not implemented.');
-}
+
   title = 'employeemanagerapp';
 
   public employees!: Employee[];
@@ -35,6 +34,19 @@ throw new Error('Method not implemented.');
         alert(error.message);
       }
     )
+  }
+
+  public onAddEmployee(addForm: NgForm): void {
+    document.getElementById('add-employee-form')?.click();
+    this.employeeService.addEmployee(addForm.value).subscribe(
+      (response: Employee) => {
+        console.log(response);
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   public onUpdateEmployee(employee: Employee): void {
